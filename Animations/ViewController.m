@@ -157,7 +157,7 @@
     self.restartButton.frame = CGRectMake(screenWidth/2 - 75.0, screenHeight/2 + 45.0, 150.0, 40.0);
     [self.view addSubview:self.restartButton];
     
-}
+} 
 
 
 @end
