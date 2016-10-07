@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIPushBehavior *pusher;
 @property (nonatomic, strong) UIButton *restartButton;
 @property (nonatomic, strong) UILabel *loseLabel;
+@property (nonatomic, strong) UILabel *scoreLabel;
+@property int score;
 
 - (IBAction)startButtonTapped:(id)sender;
 - (void)playWithBall;
@@ -45,6 +47,7 @@
     [self.ball removeFromSuperview];
     [self.loseLabel removeFromSuperview];
     [self.restartButton removeFromSuperview];
+    self.score = 0;
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -64,7 +67,7 @@
     self.ball.layer.borderWidth = 0.0;
     [self.view addSubview:self.ball];
     
-    self.paddle = [[UIView alloc] initWithFrame:CGRectMake(screenWidth/2, screenHeight - 75.0, 100, 30.0)];
+    self.paddle = [[UIView alloc] initWithFrame:CGRectMake(screenWidth/2, screenHeight - 75.0, 120, 30.0)];
     self.paddle.backgroundColor = [UIColor blueColor];
     self.paddle.layer.cornerRadius = 15.0;
     self.paddleCenterPoint = self.paddle.center;
@@ -81,9 +84,19 @@
     
     [self playWithBall];
     self.startButton.hidden = YES;
+    
 }
 
 - (void)playWithBall {
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    
+    self.scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth - 150, 20, 100, 25)];
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
+    self.scoreLabel.textAlignment = NSTextAlignmentRight;
+    self.scoreLabel.textColor = [UIColor blackColor];
+    [self.view addSubview:self.scoreLabel];
     
     self.pusher = [[UIPushBehavior alloc] initWithItems:@[self.ball] mode:UIPushBehaviorModeInstantaneous];
     self.pusher.pushDirection = CGVectorMake(0.5, 1.0);
@@ -132,6 +145,8 @@
         pushBehavior.angle = 0.0;
         pushBehavior.magnitude = 1.0;
         [self.animator addBehavior:pushBehavior];
+        self.score += 1;
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.score];
     } else {
         [self.animator removeAllBehaviors];
         [self youLose];
@@ -140,13 +155,16 @@
 
 - (void)youLose {
     
+    [self.scoreLabel removeFromSuperview];
+    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     
-    self.loseLabel = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2 - 75.0, screenHeight/2 - 25.0, 150.0, 50.0)];
+    self.loseLabel = [[UILabel alloc] initWithFrame:CGRectMake(screenWidth/2 - 100.0, screenHeight/2 - 100.0, 200.0, 100.0)];
     self.loseLabel.backgroundColor = [UIColor orangeColor];
-    self.loseLabel.text = @"GAME OVER";
+    self.loseLabel.numberOfLines = 2;
+    self.loseLabel.text = [NSString stringWithFormat:@"GAME OVER\nYour score is: %d", self.score];
     self.loseLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.loseLabel];
     
@@ -154,10 +172,10 @@
     [self.restartButton addTarget:self action:@selector(startScreen) forControlEvents:UIControlEventTouchUpInside];
     [self.restartButton setTitle:@"Play Again!" forState:UIControlStateNormal];
     self.restartButton.backgroundColor = [UIColor orangeColor];
-    self.restartButton.frame = CGRectMake(screenWidth/2 - 75.0, screenHeight/2 + 45.0, 150.0, 40.0);
+    self.restartButton.frame = CGRectMake(screenWidth/2 - 100.0, screenHeight/2 + 10, 200.0, 40.0);
     [self.view addSubview:self.restartButton];
     
-} 
+}
 
 
 @end
