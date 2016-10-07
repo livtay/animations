@@ -13,6 +13,10 @@
 		4841D2921DA7F9870052A098 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4841D2901DA7F9870052A098 /* Main.storyboard */; };
 		4841D2941DA7F9870052A098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4841D2931DA7F9870052A098 /* Assets.xcassets */; };
 		4841D2971DA7F9870052A098 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4841D2951DA7F9870052A098 /* LaunchScreen.storyboard */; };
+		4841D29F1DA7FBE00052A098 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4841D29E1DA7FBE00052A098 /* CoreGraphics.framework */; };
+		4841D2A11DA7FBE70052A098 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4841D2A01DA7FBE70052A098 /* UIKit.framework */; };
+		4841D2A31DA7FBED0052A098 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4841D2A21DA7FBED0052A098 /* Foundation.framework */; };
+		4841D2D01DA815AE0052A098 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4841D2CF1DA815AE0052A098 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		4841D2931DA7F9870052A098 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4841D2961DA7F9870052A098 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4841D2981DA7F9870052A098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4841D29E1DA7FBE00052A098 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4841D2A01DA7FBE70052A098 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4841D2A21DA7FBED0052A098 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4841D2CF1DA815AE0052A098 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4841D2D01DA815AE0052A098 /* QuartzCore.framework in Frameworks */,
+				4841D2A31DA7FBED0052A098 /* Foundation.framework in Frameworks */,
+				4841D2A11DA7FBE70052A098 /* UIKit.framework in Frameworks */,
+				4841D29F1DA7FBE00052A098 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				4841D2861DA7F9870052A098 /* Animations */,
+				4841D2A41DA7FBFC0052A098 /* Frameworks */,
 				4841D2851DA7F9870052A098 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +90,17 @@
 				4841D2881DA7F9870052A098 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4841D2A41DA7FBFC0052A098 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4841D2CF1DA815AE0052A098 /* QuartzCore.framework */,
+				4841D2A21DA7FBED0052A098 /* Foundation.framework */,
+				4841D2A01DA7FBE70052A098 /* UIKit.framework */,
+				4841D29E1DA7FBE00052A098 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +326,7 @@
 				4841D29D1DA7F9870052A098 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
