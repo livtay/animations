@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIButton *restartButton;
 @property (nonatomic, strong) UILabel *loseLabel;
 @property (nonatomic, strong) UILabel *scoreLabel;
+@property (nonatomic, strong) UIImageView *trumpHead;
 @property int score;
 
 - (IBAction)startButtonTapped:(id)sender;
@@ -44,7 +45,8 @@
 
 - (void)startScreen {
     [self.paddle removeFromSuperview];
-    [self.ball removeFromSuperview];
+//    [self.ball removeFromSuperview];
+    [self.trumpHead removeFromSuperview];
     [self.loseLabel removeFromSuperview];
     [self.restartButton removeFromSuperview];
     self.score = 0;
@@ -60,12 +62,16 @@
     self.startButton.frame = CGRectMake(screenWidth/2 - 75.0, screenHeight/2 - 40.0, 160.0, 40.0);
     [self.view addSubview:self.startButton];
     
-    self.ball = [[UIView alloc] initWithFrame:CGRectMake(100.0, 10.0, 40.0, 40.0)];
-    self.ball.backgroundColor = [UIColor redColor];
-    self.ball.layer.cornerRadius = 20.0;
-    self.ball.layer.borderColor = [UIColor blackColor].CGColor;
-    self.ball.layer.borderWidth = 0.0;
-    [self.view addSubview:self.ball];
+//    self.ball = [[UIView alloc] initWithFrame:CGRectMake(100.0, 10.0, 40.0, 40.0)];
+//    self.ball.backgroundColor = [UIColor redColor];
+//    self.ball.layer.cornerRadius = 20.0;
+//    self.ball.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.ball.layer.borderWidth = 0.0;
+//    [self.view addSubview:self.ball];
+    
+    self.trumpHead = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"trump.png"]];
+    self.trumpHead.frame = CGRectMake(0, 0, 40.0, 65.0);
+    [self.view addSubview:self.trumpHead];
     
     self.paddle = [[UIView alloc] initWithFrame:CGRectMake(screenWidth/2, screenHeight - 75.0, 120, 30.0)];
     self.paddle.backgroundColor = [UIColor blueColor];
@@ -98,12 +104,14 @@
     self.scoreLabel.textColor = [UIColor blackColor];
     [self.view addSubview:self.scoreLabel];
     
-    self.pusher = [[UIPushBehavior alloc] initWithItems:@[self.ball] mode:UIPushBehaviorModeInstantaneous];
+//    self.pusher = [[UIPushBehavior alloc] initWithItems:@[self.ball] mode:UIPushBehaviorModeInstantaneous];
+    self.pusher = [[UIPushBehavior alloc] initWithItems:@[self.trumpHead] mode:UIPushBehaviorModeInstantaneous];
     self.pusher.pushDirection = CGVectorMake(0.5, 1.0);
     self.pusher.active = YES;
     [self.animator addBehavior:self.pusher];
     
-    UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.ball, self.paddle, self.bottom]];
+//    UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.ball, self.paddle, self.bottom]];
+    UICollisionBehavior *collisionBehavior = [[UICollisionBehavior alloc] initWithItems:@[self.trumpHead, self.paddle, self.bottom]];
     collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
     [collisionBehavior addBoundaryWithIdentifier:@"bottom"
                                        fromPoint:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y)
@@ -113,7 +121,8 @@
     collisionBehavior.collisionDelegate = self;
     [self.animator addBehavior:collisionBehavior];
     
-    UIDynamicItemBehavior *ballBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.ball]];
+//    UIDynamicItemBehavior *ballBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.ball]];
+    UIDynamicItemBehavior *ballBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.trumpHead]];
     ballBehavior.elasticity = 1.0;
     ballBehavior.resistance = 0.0;
     ballBehavior.friction = 0.0;
@@ -140,8 +149,10 @@
 
 - (void)collisionBehavior:(UICollisionBehavior *)behavior beganContactForItem:(id)item1 withItem:(id)item2 atPoint:(CGPoint)p {
     
-    if (item1 == self.ball && item2 == self.paddle) {
-        UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.ball] mode:UIPushBehaviorModeInstantaneous];
+//    if (item1 == self.ball && item2 == self.paddle) {
+    if (item1 == self.trumpHead && item2 == self.paddle) {
+//        UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.ball] mode:UIPushBehaviorModeInstantaneous];
+        UIPushBehavior *pushBehavior = [[UIPushBehavior alloc] initWithItems:@[self.trumpHead] mode:UIPushBehaviorModeInstantaneous];
         pushBehavior.angle = 0.0;
         pushBehavior.magnitude = 1.0;
         [self.animator addBehavior:pushBehavior];
